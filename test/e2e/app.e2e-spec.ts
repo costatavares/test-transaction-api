@@ -2,7 +2,7 @@ import request, { type Response } from 'supertest';
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { App } from 'supertest/types';
-import { AppModule } from './../src/app.module';
+import { AppModule } from '../../src/app.module';
 import TestAgent from 'supertest/lib/agent';
 
 describe('Test (e2e)', () => {
