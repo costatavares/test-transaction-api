@@ -27,9 +27,20 @@ import { HealthController } from './presentation/controllers/health.controller';
           format: winston.format.combine(
             winston.format.timestamp(),
             winston.format.colorize(),
-            winston.format.printf(({ timestamp, level, message, context }) => {
-              return `${timestamp} [${context}] ${level}: ${message}`;
-            }),
+            winston.format.printf(
+              (
+                info: winston.Logform.TransformableInfo & { context?: unknown },
+              ) => {
+                const { timestamp, level, message, context } = info;
+                const contextStr =
+                  typeof context === 'string'
+                    ? context
+                    : context != null
+                      ? JSON.stringify(context)
+                      : 'app';
+                return `${String(timestamp)} [${contextStr}] ${String(level)}: ${String(message)}`;
+              },
+            ),
           ),
         }),
         new winston.transports.File({

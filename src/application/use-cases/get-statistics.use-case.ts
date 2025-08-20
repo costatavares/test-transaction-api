@@ -17,7 +17,6 @@ export class GetStatisticsUseCase {
       sixtySecondsAgo,
       now,
     );
-
     if (transactions.length === 0) {
       return StatisticsDto.empty();
     }

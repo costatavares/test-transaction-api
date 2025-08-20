@@ -15,6 +15,9 @@ export class CreateTransactionDto {
     description: 'Transaction timestamp in ISO 8601 UTC format',
     example: '2024-01-15T10:30:00.000Z',
   })
-  @IsDateString({}, { message: 'Timestamp must be a valid ISO 8601 date string' })
+  @IsDateString(
+    {},
+    { message: 'Timestamp must be a valid ISO 8601 date string' },
+  )
   timestamp: string;
-} 
+}

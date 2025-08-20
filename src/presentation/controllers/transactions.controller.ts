@@ -7,21 +7,25 @@ import {
   BadRequestException,
   UnprocessableEntityException,
   Delete,
+  Get,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { CreateTransactionDto } from '../../application/dtos/create-transaction.dto';
 import { CreateTransactionUseCase } from '../../application/use-cases/create-transaction.use-case';
-import { DeleteAllTransactionsUseCase } from 'src/application/use-cases/delete-all-transactions.use-case';
+import { DeleteAllTransactionsUseCase } from '../../application/use-cases/delete-all-transactions.use-case';
+import { GetStatisticsUseCase } from '../../application/use-cases/get-statistics.use-case';
+import { StatisticsDto } from '../../application/dtos/statistics.dto';
 
 @ApiTags('transactions')
-@Controller('transactions')
+@Controller()
 export class TransactionsController {
   constructor(
+    private readonly getStatisticsUseCase: GetStatisticsUseCase,
     private readonly createTransactionUseCase: CreateTransactionUseCase,
     private readonly deleteAllTransactionsUseCase: DeleteAllTransactionsUseCase,
   ) {}
 
-  @Post()
+  @Post('transactions')
   @HttpCode(HttpStatus.CREATED)
   @ApiOperation({ summary: 'Create a new transaction' })
   @ApiBody({ type: CreateTransactionDto })
@@ -60,7 +64,7 @@ export class TransactionsController {
     }
   }
 
-  @Delete()
+  @Delete('transactions')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: 'Delete all transactions' })
   @ApiResponse({
@@ -72,5 +76,20 @@ export class TransactionsController {
     return {
       message: 'All transactions deleted successfully',
     };
+  }
+
+  @Get('statistics')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({
+    summary: 'Get transaction statistics for the last 60 seconds',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Statistics retrieved successfully',
+    type: StatisticsDto,
+  })
+  // async getStatistics(): Promise<StatisticsDto> {
+  async getStatistics(): Promise<StatisticsDto> {
+    return await this.getStatisticsUseCase.execute();
   }
 }

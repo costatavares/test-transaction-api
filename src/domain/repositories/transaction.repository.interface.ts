@@ -6,4 +6,4 @@ export interface ITransactionRepository {
   findByTimeRange(startTime: Date, endTime: Date): Promise<Transaction[]>;
   deleteAll(): Promise<void>;
   count(): Promise<number>;
-} 
+}

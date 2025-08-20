@@ -31,4 +31,4 @@ export class Transaction {
     const now = new Date();
     return (now.getTime() - this.timestamp.getTime()) / 1000;
   }
-} 
+}

@@ -37,7 +37,6 @@ async function bootstrap() {
     .setDescription('API RESTful to manage transactions and statistics')
     .setVersion('1.0')
     .addTag('transactions', 'Transaction-related operations')
-    .addTag('statistics', 'Statistics-related operations')
     .addTag('health', 'Application health check')
     .build();
 
@@ -46,8 +45,7 @@ async function bootstrap() {
 
   const port = process.env.PORT || 3000;
   await app.listen(port, '0.0.0.0');
-  
   console.log(`Application is running on: http://localhost:${port}`);
   console.log(`Swagger documentation: http://localhost:${port}/api`);
 }
-bootstrap();
+void bootstrap();

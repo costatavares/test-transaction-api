@@ -21,7 +21,7 @@ export class StatisticsDto {
 
   @ApiProperty({
     description: 'Minimum transaction amount in the last 60 seconds',
-    example: 10.50,
+    example: 10.5,
   })
   min: number;
 
@@ -31,7 +31,13 @@ export class StatisticsDto {
   })
   max: number;
 
-  constructor(count: number, sum: number, avg: number, min: number, max: number) {
+  constructor(
+    count: number,
+    sum: number,
+    avg: number,
+    min: number,
+    max: number,
+  ) {
     this.count = count;
     this.sum = sum;
     this.avg = avg;
@@ -42,4 +48,4 @@ export class StatisticsDto {
   static empty(): StatisticsDto {
     return new StatisticsDto(0, 0, 0, 0, 0);
   }
-} 
+}
