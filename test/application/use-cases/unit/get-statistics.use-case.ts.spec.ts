@@ -46,8 +46,6 @@ describe('GetStatisticsUseCase', () => {
     return new Transaction(amount, new Date(timestamp), id);
   });
 
-  //   { amount: faker.number.int({ min: 1, max: 10000 }), timestamp: new Date().toISOString(), id: faker.string.uuid()};
-
   it('should return empty statistics when no transactions exist', async () => {
     const expectedStatistics: StatisticsResponse = {
       count: 0,

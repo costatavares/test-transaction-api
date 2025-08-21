@@ -12,7 +12,6 @@ export class InMemoryTransactionRepository implements ITransactionRepository {
   }
 
   findAll(): Promise<Transaction[]> {
-    console.log('findAll', this.transactions);
     return Promise.resolve([...this.transactions]);
   }
 
